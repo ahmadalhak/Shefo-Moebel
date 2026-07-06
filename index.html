@@ -65,9 +65,47 @@ nav a{display:inline-block;margin:8px;font-size:13px}
 .hero h1{font-size:40px}
 .hero p{font-size:18px}
 .table-section,.services,.footer-grid{grid-template-columns:1fr}
-.cart-box{left:50%;right:auto;top:auto;bottom:0;transform:translateX(-50%);width:96vw;max-width:96vw;max-height:75vh;border-radius:18px 18px 0 0;padding:26px 18px 18px}
+
+.products{
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.card img{
+height:130px;
+padding:5px;
+}
+
+.card h3{
+font-size:12px;
+min-height:38px;
+margin:8px 4px;
+}
+
+.price{
+font-size:18px;
+}
+
+.card button{
+font-size:10px;
+padding:8px 4px;
+margin:8px 4px;
+}
+
+.cart-box{
+left:50%;
+right:auto;
+top:auto;
+bottom:0;
+transform:translateX(-50%);
+width:96vw;
+max-width:96vw;
+max-height:75vh;
+border-radius:18px 18px 0 0;
+padding:26px 18px 18px;
+}
+
 .cart-box h2{font-size:34px;padding-right:38px}
-.card img{height:270px}
 }
 </style>
 </head>
@@ -146,7 +184,7 @@ nav a{display:inline-block;margin:8px;font-size:13px}
 <div>
 <h3>KONTAKT</h3>
 <p>WhatsApp: +49 1577 3747846</p>
-<p>E-Mail:  shammoebel@gmail.com</p>
+<p>E-Mail: info@shammoebel.de</p>
 <p>Adresse: Primstalstraße 12, 66636 Theley</p>
 </div>
 </div>
@@ -231,6 +269,7 @@ function addToCart(name, price){
 let item = cart.find(p => p.name === name);
 if(item){item.qty++;}else{cart.push({name:name,price:price,qty:1});}
 saveCart();
+openCart();
 }
 
 function removeItem(index){

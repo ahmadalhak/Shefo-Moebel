@@ -1,1 +1,428 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sham Möbel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{background:#050505;color:#fff;font-family:Arial,sans-serif}
+h1,h2,h3{font-family:Georgia,serif}
+header{min-height:105px;background:#050505;border-bottom:1px solid #b88932;display:flex;align-items:center;justify-content:space-between;padding:0 45px;position:sticky;top:0;z-index:1000}
+.logo img{height:90px;object-fit:contain}
+nav a{color:#fff;text-decoration:none;margin:0 14px;font-size:14px;font-weight:bold;text-transform:uppercase}
+nav a:hover{color:#d4af37}
+.cart-top{border:1px solid #d4af37;color:#d4af37;padding:13px 18px;border-radius:12px;cursor:pointer;font-weight:bold;white-space:nowrap}
+.hero{min-height:520px;background:linear-gradient(90deg,rgba(0,0,0,.95),rgba(0,0,0,.35)),url("wohnzimmer.jpg.jpeg");background-size:cover;background-position:center;display:flex;align-items:center;padding:60px;border-bottom:1px solid #b88932}
+.hero-content{max-width:650px}
+.hero h4{color:#d4af37;font-size:20px;margin-bottom:12px}
+.hero h1{font-size:62px;letter-spacing:3px;margin-bottom:15px}
+.hero p{font-size:24px;line-height:1.4;margin-bottom:25px}
+.hero-features{display:flex;gap:25px;margin:25px 0;flex-wrap:wrap}
+.hero-features span{color:#d4af37;font-size:26px;margin-right:8px}
+.btn{display:inline-block;background:#d4af37;color:#000;text-decoration:none;padding:16px 32px;font-weight:bold;border-radius:3px}
+section{padding:55px 30px}
+.section-title{text-align:center;color:#d4af37;font-size:38px;margin-bottom:10px}
+.subtitle{text-align:center;color:#ddd;margin-bottom:30px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;max-width:1200px;margin:auto}
+.card{background:#090909;border:1px solid #b88932;border-radius:8px;overflow:hidden;text-align:center}
+.card img{width:100%;height:300px;object-fit:contain;background:#000;padding:10px;cursor:pointer}
+.card h3{font-size:20px;margin:18px 10px 8px;min-height:48px}
+.price{color:#d4af37;font-size:30px;margin:8px}
+button{background:#050505;color:#fff;border:1px solid #d4af37;padding:12px 18px;margin:12px;font-weight:bold;cursor:pointer;border-radius:3px}
+button:hover{background:#d4af37;color:#000}
+.table-section{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;border-top:1px solid #b88932;border-bottom:1px solid #b88932;padding:40px 0}
+.table-section img{width:100%;border:1px solid #b88932;border-radius:8px;cursor:pointer;background:#000}
+.table-section h2{color:#d4af37;font-size:34px;margin-bottom:15px}
+.table-section p{line-height:1.7;color:#ddd}
+.services{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #b88932;border-bottom:1px solid #b88932}
+.service-box{padding:35px;border-right:1px solid #5b4218}
+.service-box h3{color:#d4af37;margin-bottom:12px}
+.service-box p{color:#ddd;line-height:1.6}
+footer{background:#050505;padding:45px 60px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1.5fr;gap:40px;border-bottom:1px solid #333;padding-bottom:30px}
+footer img{height:100px}
+footer h3{margin-bottom:15px}
+footer p,footer a{color:#ddd;text-decoration:none;display:block;margin:8px 0;line-height:1.5}
+.copy{text-align:center;color:#ccc;margin-top:22px}
+.whatsapp-fixed{position:fixed;right:25px;bottom:25px;background:#d4af37;color:#000;width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;text-decoration:none;z-index:1000}
+.cart-box{display:none;position:fixed;right:20px;top:120px;background:#111;border:1px solid #d4af37;width:430px;max-width:95%;max-height:80vh;overflow-y:auto;padding:25px;z-index:9999;border-radius:12px}
+.cart-box h2{color:#d4af37;font-size:36px;margin-bottom:20px}
+.close-cart{position:absolute;right:18px;top:12px;color:#d4af37;font-size:34px;cursor:pointer;line-height:1}
+.cart-item{border-bottom:1px solid #333;padding:15px 0}
+.cart-item strong{font-size:18px}
+.cart-item button{padding:7px 12px;margin:7px 5px}
+.form-box input,.form-box textarea{width:100%;padding:13px;margin:8px 0;background:#050505;color:#fff;border:1px solid #d4af37;border-radius:5px}
+.form-box textarea{height:90px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:10000;align-items:center;justify-content:center;padding:20px}
+.modal img{max-width:92%;max-height:86%;border:1px solid #d4af37;background:#000}
+.close{position:absolute;right:35px;top:25px;font-size:45px;cursor:pointer}
+@media(max-width:800px){
+header{height:auto;flex-direction:column;padding:18px;gap:12px}
+nav{text-align:center}
+nav a{display:inline-block;margin:8px;font-size:13px}
+.hero{padding:45px 25px;min-height:430px}
+.hero h1{font-size:40px}
+.hero p{font-size:18px}
+.table-section,.services,.footer-grid{grid-template-columns:1fr}
+.cart-box{left:50%;right:auto;top:auto;bottom:0;transform:translateX(-50%);width:96vw;max-width:96vw;max-height:75vh;border-radius:18px 18px 0 0;padding:26px 18px 18px}
+.cart-box h2{font-size:34px;padding-right:38px}
+.card img{height:270px}
+}
+</style>
+</head>
+<body>
 
+<header>
+<div class="logo"><img src="logo.png.jpeg" alt="Sham Möbel Logo"></div>
+<nav>
+<a href="#start">Startseite</a>
+<a href="#sofas">Sofas</a>
+<a href="#tisch">Tisch</a>
+<a href="#ueber">Über uns</a>
+<a href="#lieferung">Lieferung</a>
+<a href="#kontakt">Kontakt</a>
+</nav>
+<div class="cart-top" onclick="toggleCart()">Warenkorb (<span id="cartCount">0</span>)</div>
+</header>
+
+<section class="hero" id="start">
+<div class="hero-content">
+<h4>WILLKOMMEN BEI</h4>
+<h1>SHAM MÖBEL</h1>
+<p>ELEGANTE SOFAS UND TISCHE<br>FÜR IHR ZUHAUSE</p>
+<div class="hero-features">
+<div><span>▣</span>Kostenlose Lieferung</div>
+<div><span>▣</span>Barzahlung bei Lieferung</div>
+<div><span>▣</span>Bezahlung erst bei Erhalt</div>
+</div>
+<a href="#sofas" class="btn">ZU DEN SOFAS →</a>
+</div>
+</section>
+
+<section id="sofas">
+<h2 class="section-title">UNSERE SOFAS</h2>
+<p class="subtitle">22 hochwertige Sofamodelle mit elegantem Design.</p>
+<div class="products" id="productGrid"></div>
+</section>
+
+<section id="tisch">
+<div class="table-section">
+<img src="tisch1.jpg.jpeg" onclick="openImage(this.src)" alt="Tisch Modell">
+<div>
+<h2>UNSER TISCHMODELL</h2>
+<p>Unser Tischmodell passt perfekt zu unseren Sofas.</p>
+<div class="price">499 €</div>
+<button onclick="addToCart('Tisch Modell',499)">IN DEN WARENKORB</button>
+</div>
+</div>
+</section>
+
+<section class="services" id="lieferung">
+<div class="service-box"><h3>KOSTENLOSE LIEFERUNG</h3><p>Wir liefern Ihre Möbel kostenlos direkt zu Ihnen nach Hause.</p></div>
+<div class="service-box"><h3>BARZAHLUNG BEI LIEFERUNG</h3><p>Sie bezahlen bequem in bar, wenn Ihre Bestellung bei Ihnen ankommt.</p></div>
+<div class="service-box"><h3>BEZAHLUNG ERST BEI ERHALT</h3><p>Erst wenn Sie die Ware erhalten haben, bezahlen Sie.</p></div>
+</section>
+
+<section id="ueber">
+<h2 class="section-title">ÜBER UNS</h2>
+<p class="subtitle">Sham Möbel steht für Qualität, Komfort und elegantes Design.</p>
+</section>
+
+<footer id="kontakt">
+<div class="footer-grid">
+<div>
+<img src="logo.png.jpeg" alt="Sham Möbel Logo">
+<p>Sham Möbel steht für Qualität, Komfort und elegantes Design.</p>
+</div>
+<div>
+<h3>NAVIGATION</h3>
+<a href="#start">Startseite</a>
+<a href="#sofas">Sofas</a>
+<a href="#tisch">Tisch</a>
+<a href="#lieferung">Lieferung</a>
+<a href="#kontakt">Kontakt</a>
+</div>
+<div>
+<h3>KONTAKT</h3>
+<p>WhatsApp: +49 1577 3747846</p>
+<p>E-Mail:  shammoebel@gmail.com</p>
+<p>Adresse: Primstalstraße 12, 66636 Theley</p>
+</div>
+</div>
+<p class="copy">© 2026 Sham Möbel – Alle Rechte vorbehalten.</p>
+</footer>
+
+<a class="whatsapp-fixed" href="https://wa.me/4915773747846" target="_blank">☎</a>
+
+<div class="modal" id="imageModal" onclick="closeImage()">
+<span class="close">&times;</span>
+<img id="bigImage">
+</div>
+
+<div class="cart-box" id="cartBox">
+<span class="close-cart" onclick="closeCart()">×</span>
+<h2>Warenkorb</h2>
+<div id="cartItems"></div>
+<h3>Gesamt: <span id="total">0</span> €</h3>
+
+<div class="form-box">
+<input id="fname" placeholder="Vorname">
+<input id="lname" placeholder="Nachname">
+<input id="phone" placeholder="Telefonnummer">
+<input id="street" placeholder="Straße und Hausnummer">
+<input id="plz" placeholder="PLZ">
+<input id="city" placeholder="Ort">
+<textarea id="note" placeholder="Lieferhinweis optional"></textarea>
+</div>
+
+<button onclick="sendWhatsApp()">BESTELLUNG PER WHATSAPP SENDEN</button>
+<button onclick="printInvoice()">RECHNUNG ANZEIGEN / DRUCKEN</button>
+</div>
+
+<script>
+const products = [
+  {name: "Sofa Samt Grau-Gold", price: 1599, img: "sofa1.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Beige Gold", price: 1599, img: "sofa2.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Royal Blau", price: 1299, img: "sofa3.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Creme-Grau", price: 1599, img: "sofa4.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Royal Blau-Grau", price: 1799, img: "sofa5.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Lounge Braun-Gold", price: 1899, img: "sofa6.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Ivory Gold", price: 1799, img: "sofa7.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Royal Blau Deluxe", price: 1899, img: "sofa8.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Grau Komfort", price: 1699, img: "sofa9.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Creme Modern", price: 1799, img: "sofa10.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Grau Goldline", price: 1899, img: "sofa11.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Grau Klassik", price: 1699, img: "sofa12.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Taupe Gold", price: 1899, img: "sofa13.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Creme Goldline", price: 1799, img: "sofa14.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Schwarz-Creme Luxus", price: 1999, img: "sofa15.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Schwarz-Creme Royal", price: 1999, img: "sofa16.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Beige Sessel Komfort", price: 1799, img: "sofa17.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Schwarz-Grau Premium", price: 1899, img: "sofa18.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Beige Relax", price: 1699, img: "sofa19.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Hellgrau Komfort", price: 1699, img: "sofa20.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Creme Elegant", price: 1799, img: "sofa21.jpg.jpeg", type: "sofa"},
+  {name: "Sofa Grau Modern", price: 1699, img: "sofa22.jpg.jpeg", type: "sofa"}
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function renderProducts(){
+const grid = document.getElementById("productGrid");
+grid.innerHTML = "";
+products.forEach(p=>{
+grid.innerHTML += `
+<div class="card">
+<img src="${p.img}" onclick="openImage(this.src)" alt="${p.name}">
+<h3>${p.name}</h3>
+<div class="price">${p.price} €</div>
+<button onclick="addToCart('${p.name.replace(/'/g, "\\'")}',${p.price})">IN DEN WARENKORB</button>
+</div>`;
+});
+}
+
+function saveCart(){
+localStorage.setItem("cart", JSON.stringify(cart));
+updateCart();
+}
+
+function addToCart(name, price){
+let item = cart.find(p => p.name === name);
+if(item){item.qty++;}else{cart.push({name:name,price:price,qty:1});}
+saveCart();
+}
+
+function removeItem(index){
+cart.splice(index,1);
+saveCart();
+}
+
+function changeQty(index, amount){
+cart[index].qty += amount;
+if(cart[index].qty <= 0){cart.splice(index,1);}
+saveCart();
+}
+
+function updateCart(){
+let cartItems = document.getElementById("cartItems");
+let cartCount = document.getElementById("cartCount");
+let totalBox = document.getElementById("total");
+cartItems.innerHTML = "";
+let total = 0;
+let count = 0;
+
+cart.forEach((item,index)=>{
+total += item.price * item.qty;
+count += item.qty;
+cartItems.innerHTML += `
+<div class="cart-item">
+<strong>${item.name}</strong><br>
+${item.price} € × ${item.qty}<br>
+<button onclick="changeQty(${index},-1)">-</button>
+<button onclick="changeQty(${index},1)">+</button>
+<button onclick="removeItem(${index})">Entfernen</button>
+</div>`;
+});
+
+cartCount.innerText = count;
+totalBox.innerText = total;
+}
+
+function openCart(){document.getElementById("cartBox").style.display = "block";}
+function closeCart(){document.getElementById("cartBox").style.display = "none";}
+function toggleCart(){
+let box = document.getElementById("cartBox");
+box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function openImage(src){
+document.getElementById("bigImage").src = src;
+document.getElementById("imageModal").style.display = "flex";
+}
+
+function closeImage(){
+document.getElementById("imageModal").style.display = "none";
+}
+
+function getCustomerData(){
+let fname = document.getElementById("fname").value;
+let lname = document.getElementById("lname").value;
+let phone = document.getElementById("phone").value;
+let street = document.getElementById("street").value;
+let plz = document.getElementById("plz").value;
+let city = document.getElementById("city").value;
+let note = document.getElementById("note").value;
+
+if(!fname || !lname || !phone || !street || !plz || !city){
+alert("Bitte alle Pflichtfelder ausfüllen.");
+return null;
+}
+return {fname,lname,phone,street,plz,city,note};
+}
+
+function sendWhatsApp(){
+if(cart.length === 0){alert("Der Warenkorb ist leer.");return;}
+let data = getCustomerData();
+if(!data){return;}
+let total = cart.reduce((sum,item)=>sum + item.price * item.qty,0);
+
+let text = "Neue Bestellung - Sham Möbel\n\n";
+text += "Kunde: " + data.fname + " " + data.lname + "\n";
+text += "Telefon: " + data.phone + "\n";
+text += "Adresse: " + data.street + ", " + data.plz + " " + data.city + "\n\n";
+text += "Bestellung:\n";
+cart.forEach(item=>{
+text += "- " + item.name + " x" + item.qty + " - " + (item.price * item.qty) + " €\n";
+});
+text += "\nGesamtpreis: " + total + " €\n";
+text += "Zahlung: Barzahlung bei Lieferung\n";
+text += "Lieferung: Im Preis enthalten\n";
+if(data.note){text += "Lieferhinweis: " + data.note + "\n";}
+window.open("https://wa.me/4915773747846?text=" + encodeURIComponent(text), "_blank");
+}
+
+function printInvoice(){
+if(cart.length === 0){alert("Der Warenkorb ist leer.");return;}
+let data = getCustomerData();
+if(!data){return;}
+
+let today = new Date().toLocaleDateString("de-DE");
+let invoiceNr = "SM-" + Date.now().toString().slice(-6);
+let total = cart.reduce((sum,item)=>sum + item.price * item.qty,0);
+let rows = "";
+
+cart.forEach((item,index)=>{
+rows += `
+<tr>
+<td>${index + 1}</td>
+<td>${item.name}</td>
+<td>${item.qty}</td>
+<td>${item.price.toFixed(2)} €</td>
+<td>${(item.price * item.qty).toFixed(2)} €</td>
+</tr>`;
+});
+
+let invoice = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rechnung ${invoiceNr}</title>
+<style>
+body{font-family:Arial,sans-serif;color:#000;padding:40px}
+.top{text-align:center;font-size:14px;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:30px}
+.logo{text-align:right}
+.logo img{width:140px;margin-bottom:10px}
+h1{margin-top:35px}
+table{width:100%;border-collapse:collapse;margin-top:25px}
+th,td{border:1px solid #000;padding:8px;font-size:14px}
+th{background:#eee}
+.right{text-align:right}
+.total{font-weight:bold;font-size:18px}
+.footer{margin-top:50px;font-size:13px}
+.printbtn{margin-top:30px;padding:12px 25px;background:#000;color:#fff;border:none;cursor:pointer}
+@media print{.printbtn{display:none}}
+</style>
+</head>
+<body>
+<div class="top">
+<strong>Sham Möbel</strong><br>
+Primstalstraße 12, 66636 Theley<br>
+Tel: 015773747846
+</div>
+<div class="grid">
+<div>
+<strong>${data.fname} ${data.lname}</strong><br>
+${data.street}<br>
+${data.plz} ${data.city}<br>
+Tel: ${data.phone}
+</div>
+<div class="logo">
+<img src="logo.png.jpeg" onerror="this.style.display='none'"><br>
+<strong>Sham Möbel</strong><br>
+Primstalstraße 12<br>
+66636 Theley<br>
+Tel: 015773747846
+</div>
+</div>
+<div class="right">
+<strong>Rechnung Nr.:</strong> ${invoiceNr}<br>
+<strong>Datum:</strong> ${today}
+</div>
+<h1>Rechnung</h1>
+<table>
+<tr>
+<th>Pos</th>
+<th>Artikel</th>
+<th>Menge</th>
+<th>Einzelpreis</th>
+<th>Gesamtpreis</th>
+</tr>
+${rows}
+<tr>
+<td colspan="4" class="right total">Gesamt</td>
+<td class="total">${total.toFixed(2)} €</td>
+</tr>
+</table>
+<div class="footer">
+<p><strong>Zahlung:</strong> Barzahlung bei Lieferung</p>
+<p><strong>Lieferung:</strong> Im Preis enthalten</p>
+<p><strong>Lieferhinweis:</strong> ${data.note || "-"}</p>
+</div>
+<button class="printbtn" onclick="window.print()">Rechnung drucken / als PDF speichern</button>
+</body>
+</html>`;
+
+let win = window.open("", "_blank");
+win.document.open();
+win.document.write(invoice);
+win.document.close();
+}
+
+renderProducts();
+updateCart();
+</script>
+
+</body>
+</html>
